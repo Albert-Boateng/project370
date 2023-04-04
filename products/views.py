@@ -77,8 +77,8 @@ def thank_you(request):
         products = Product.get_products_by_id(list(carts.keys()))
         print(address, phone, user_id, carts, products)
 
-        if len(phone) == 10:
-            if phone[0] in "7896":
+        if len(phone) == 11:
+            if phone[0] in "01":
                 for product in products:
                     order = Order(user=User(id=user_id), product=product, price=product.price,
                                   quantity=carts.get(str(product.id)), address=address, phone=phone)
@@ -89,7 +89,7 @@ def thank_you(request):
                 messages.error(request, 'Invalid Phone number')
                 return redirect('/products/cart')
         else:
-            messages.error(request, 'Phone no should have 10 digits')
+            messages.error(request, 'Phone no. should have 11 digits')
             return redirect('/products/cart')
 
     else:
